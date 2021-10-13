@@ -1,5 +1,6 @@
 from tkinter import *
 import requests
+import json
 from bs4 import BeautifulSoup
 
 win = Tk()
@@ -37,10 +38,14 @@ def ChattingLogin():
     url = "http://192.168.0.57:8181/huefax/H_fbComment.do?cmd=ChattingLogin"
     req = requests.get(url)
     soup = BeautifulSoup(req.text, "html.parser")
-    print(soup)
+    JSONdata = json.loads(str(soup))
+    data = JSONdata['result']
+    if (data == 'SUCCESS'):
+        btn.config(text='로그인 성공')
+    else:
+        btn.config(text='로그인 실패')
 
-
-# 로그인 버튼
+        # 로그인 버튼
 btn = Button(win)
 btn.config(text="로그인")
 btn.config(command=ChattingLogin)
