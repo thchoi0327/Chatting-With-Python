@@ -1,10 +1,12 @@
+from urllib.request import urlopen
+from urllib.error import URLError, HTTPError
 from tkinter import *
 import requests
 import json
 from bs4 import BeautifulSoup
 
 win = Tk()
-win.title("Naver Log-in")
+win.title("huefax Log-in")
 x = 400
 y = 300
 widthX = (win.winfo_screenwidth() - x)/2
@@ -36,9 +38,14 @@ ent2.pack()
 
 def ChattingLogin():
     url = "http://192.168.0.57:8181/huefax/H_fbComment.do?cmd=ChattingLogin"
-    req = requests.get(url)
-    soup = BeautifulSoup(req.text, "html.parser")
-    JSONdata = json.loads(str(soup))
+    loginData = {'userId': 'admin1234', 'userPw': '1234'}
+    try:
+        req = requests.post(url, data=loginData)
+    except requests.exceptions.RequestException as e:
+        btn.config(text="서버연결실패")
+        return
+    print('리턴이 먹었나?')
+    JSONdata = json.loads(str(req.text))
     data = JSONdata['result']
     if (data == 'SUCCESS'):
         btn.config(text='로그인 성공')
