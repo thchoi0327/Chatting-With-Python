@@ -1,5 +1,3 @@
-from urllib.request import urlopen
-from urllib.error import URLError, HTTPError
 from tkinter import *
 import requests
 import json
