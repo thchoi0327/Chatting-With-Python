@@ -4,7 +4,11 @@ from bs4 import BeautifulSoup
 
 win = Tk()
 win.title("Naver Log-in")
-win.geometry("400x300")
+x = 400
+y = 300
+widthX = (win.winfo_screenwidth() - x)/2
+heightY = (win.winfo_screenheight() - y)/2
+win.geometry('%dx%d+%d+%d' % (x, y, widthX, heightY))
 win.option_add("*Font", "궁서 20")
 
 
@@ -30,22 +34,9 @@ ent2.pack()
 
 
 def ChattingLogin():
-    url = "http://localhost:8181/huefax/H_fbComment.do?cmd=ChattingLogin"
+    url = "http://192.168.0.57:8181/huefax/H_fbComment.do?cmd=ChattingLogin"
     req = requests.get(url)
     soup = BeautifulSoup(req.text, "html.parser")
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
-    print(soup)
     print(soup)
 
 
